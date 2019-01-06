@@ -1,0 +1,44 @@
+<!--
+ * @Author: Mario X Wang
+ * @Date: 2019-01-06 13:36:09
+ * @LastEditTime: 2019-01-06 19:34:59
+ * @Description: 
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="./jquery.js"></script>
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="user">
+  <input type="password" id="pass">
+  <input type="button" id="login" value="登录">
+</body>
+<script>
+  $(() => {
+    $('#login').click(function () {
+      let user = $('#user').val();
+      let pass = $('#pass').val();
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:7001/user/login",
+        data: {
+          userName: $("#user").val(),
+          password: $("#pass").val()
+        },
+        dataType: "json",
+        success: function (data) {
+          console.log(data)
+        }
+      });
+    })
+  })
+</script>
+
+</html>

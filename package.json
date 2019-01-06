@@ -22,8 +22,11 @@
   },
   "dependencies": {
     "egg-cloud": "^0.2.0",
+    "egg-cors": "^2.1.2",
     "egg-mysql": "^3.0.0",
-    "egg-scripts": "^2.10.0"
+    "egg-scripts": "^2.10.0",
+    "md5": "^2.2.1",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "autod": "^3.0.1",

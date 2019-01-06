@@ -9,13 +9,5 @@ logs/
 .vscode
 *.swp
 *.lock
-*.js
 !.autod.conf.js
 package-lock.json
-
-app/**/*.js
-test/**/*.js
-config/**/*.js
-app/**/*.map
-test/**/*.map
-config/**/*.map

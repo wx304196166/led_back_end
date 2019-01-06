@@ -2,7 +2,7 @@
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-01-06 19:31:09
+ * @LastEditTime: 2019-01-06 20:04:51
  * @Description: 路由
  */
 
@@ -14,8 +14,7 @@ module.exports = app => {
     controller
   } = app;
   const {
-    user,
-    testHtml
+    user
   } = controller;
 
   router.options('*', async ctx => {
@@ -26,7 +25,7 @@ module.exports = app => {
   // 后台管理服务
   router.post('/user/login', user.common.login);
 
-  router.get('/user/createUser/:userName/:password', user.common.createUser);
+  router.post('/user/createCustomer', user.common.createCustomer);
 
   // router.post('/user/logout', user.common.logout);
 };

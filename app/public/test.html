@@ -1,7 +1,7 @@
 <!--
  * @Author: Mario X Wang
  * @Date: 2019-01-06 13:36:09
- * @LastEditTime: 2019-01-06 19:34:59
+ * @LastEditTime: 2019-01-06 20:01:05
  * @Description: 
  -->
 <!DOCTYPE html>
@@ -19,6 +19,8 @@
   <input type="text" id="user">
   <input type="password" id="pass">
   <input type="button" id="login" value="登录">
+  <input type="button" id="register" value="注册">
+
 </body>
 <script>
   $(() => {
@@ -28,6 +30,22 @@
       $.ajax({
         type: "POST",
         url: "http://localhost:7001/user/login",
+        data: {
+          userName: $("#user").val(),
+          password: $("#pass").val()
+        },
+        dataType: "json",
+        success: function (data) {
+          console.log(data)
+        }
+      });
+    })
+    $('#register').click(function () {
+      let user = $('#user').val();
+      let pass = $('#pass').val();
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:7001/user/createCustomer",
         data: {
           userName: $("#user").val(),
           password: $("#pass").val()

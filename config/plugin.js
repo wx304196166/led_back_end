@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
- * @LastEditTime: 2019-01-06 19:04:49
+ * @LastEditTime: 2019-01-07 09:44:38
  * @Description: 
  */
 'use strict';
@@ -13,3 +13,4 @@ exports.cors = {
   enable: true,
   package: 'egg-cors',
 };
+

@@ -2,7 +2,7 @@
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-01-06 20:04:51
+ * @LastEditTime: 2019-01-30 11:09:10
  * @Description: 路由
  */
 
@@ -13,19 +13,22 @@ module.exports = app => {
     router,
     controller
   } = app;
-  const {
-    user
-  } = controller;
 
   router.options('*', async ctx => {
     ctx.body = 'ok';
   });
-  // 测试页面
-  // router.get('/test', testHtml.index);
+
   // 后台管理服务
-  router.post('/user/login', user.common.login);
+  router.resources('brands', 'master/products/brands', controller.master.products.brands);
+  router.resources('classifications', 'master/products/classifications', controller.master.products.classifications);
+  router.resources('labels', 'master/products/labels', controller.master.products.labels);
+  router.resources('products', 'master/products/products', controller.master.products.products);
 
-  router.post('/user/createCustomer', user.common.createCustomer);
+  router.resources('integration', 'master/integration', controller.master.integration);
+  router.resources('maintenance', 'master/maintenance', controller.master.maintenance);
+  router.resources('users', 'master/users', controller.master.users);
 
-  // router.post('/user/logout', user.common.logout);
+  // 公共接口
+  router.post('/user/login', controller.common.login);
+  router.post('/user/createCustomer', controller.common.createCustomer);
 };

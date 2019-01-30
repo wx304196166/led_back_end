@@ -1,6 +1,8 @@
 'use strict';
 
-const { Controller } = require('egg');
+const {
+  Controller
+} = require('egg');
 
 /**
  * BaseController
@@ -8,17 +10,20 @@ const { Controller } = require('egg');
  * @author ruiyong-lee
  */
 class BaseController extends Controller {
-  get user() {
-    return this.ctx.session.user;
+
+  success(data) {
+    this.ctx.body = {
+      code: 0,
+      data
+    };
+    this.ctx.status = 200;
   }
 
-  success(data, status) {
-    this.ctx.body = { code: this.ctx.SUCCESS_CODE, data };
-    this.ctx.status = status || 200;
-  }
-
-  fail(code, message) {
-    this.ctx.body = { code, message };
+  fail(message) {
+    this.ctx.body = {
+      code: 1,
+      message
+    };
     this.ctx.status = 200;
   }
 

@@ -2,10 +2,17 @@ const Service = require('egg').Service;
 
 class CrudService extends Service {
   // 分页列表
-  async index(tableName, current, limit) {
+  async index(tableName, params) {
+    const {
+      current,
+      size,
+      map
+    } = params
+
     const table = await this.app.mysql.select(tableName, {
-      limit, // 返回数据量
-      offset: current * limit, // 数据偏移量
+      where: map, // WHERE 条件
+      limit: size, // 返回数据量
+      offset: current * size, // 数据偏移量
     });
     return table;
   }
@@ -39,7 +46,9 @@ class CrudService extends Service {
   }
   // 删除
   async destroy(tableName, id) {
-    const result = await this.app.mysql.delete(tableName, {id});
+    const result = await this.app.mysql.delete(tableName, {
+      id
+    });
     if (result.message) {
       return {
         success: false,

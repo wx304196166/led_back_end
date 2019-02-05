@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-03 22:01:19
+ * @LastEditTime: 2019-02-05 12:44:55
  * @Description: 
  */
 'use strict';
@@ -57,13 +57,14 @@ class BrandsController extends Controller {
       ctx,
       service
     } = this;
-    const recieve = ctx.request.body;
+    const data = ctx.request.body;
 
     const tableName = ctx.params.index + '_info';
-    const data = {}
+    data.modification_time=new Date();
+    /* const data = {}
     for (const key in recieve) {
       data[utils.toLine(key)] = recieve[key]
-    }
+    } */
     const res = await service.master.crud.update(tableName, data);
     if (res.success) {
       this.success(res.result);
@@ -77,11 +78,9 @@ class BrandsController extends Controller {
       ctx,
       service
     } = this;
-    const {
-      id
-    } = ctx.request.body;
+    const recieve = ctx.request.body;
     const tableName = ctx.params.index + '_info';
-    const res = await service.master.crud.destroy(tableName, id);
+    const res = await service.master.crud.destroy(tableName, recieve);
     if (res.success) {
       this.success(res.result);
     } else {

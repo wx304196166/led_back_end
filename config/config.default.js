@@ -36,8 +36,8 @@ module.exports = appInfo => {
   config.cors = {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
   };
- config.static={
-  prefix: '/'
- }
+  config.static = {
+    prefix: '/'
+  };
   return config;
 }

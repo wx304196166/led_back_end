@@ -2,22 +2,26 @@ const Service = require('egg').Service;
 
 class CrudService extends Service {
   // 分页列表
-  async index(tableName, params) {
+  async queryPageList(tableName, size, current, map) {
     const {
-      current,
-      size,
-      map
-    } = params
+      mysql
+    } = this.app;
+    const total = await mysql.query(`select count(id) from ${tableName}`);
+    const table = await mysql.query(
+      `select * from ${tableName} where name like '%${map.name}%' limit ${(current-1)*size} , ${size}`
+    );
 
-    const table = await this.app.mysql.select(tableName, {
-      where: map, // WHERE 条件
-      limit: size, // 返回数据量
-      offset: current * size, // 数据偏移量
-    });
-    return table;
+    return {
+      success: true,
+      result: {
+        records: table,
+        total: total[0]['count(id)']
+      }
+    };
   }
   // 创建
   async create(tableName, data) {
+    data.modification_time = this.app.mysql.literals.now;
     const result = await this.app.mysql.insert(tableName, data);
     if (result.message) {
       return {
@@ -33,15 +37,16 @@ class CrudService extends Service {
   // 更新
   async update(tableName, data) {
     const result = await this.app.mysql.update(tableName, data);
-    if (result.message) {
+    const flag = result.affectedRows === 1
+    if (flag) {
       return {
-        success: false,
-        message: result.message
+        success: true,
+        result
       }
     }
     return {
-      success: true,
-      result
+      success: false,
+      message: result.message
     }
   }
   // 删除

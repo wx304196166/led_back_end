@@ -1,15 +1,15 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-01-06 20:12:22
+ * @LastEditTime: 2019-02-03 21:32:16
  * @Description: 
  */
 'use strict';
 
 // const md5 = require('md5');
-const Controller = require('../../core/base_controller');
+const Controller = require('../core/base_controller');
 const uuid = require('uuid/v4');
-class UserCommonController extends Controller {
+class CommonController extends Controller {
 
   // 登录
   async login() {
@@ -66,4 +66,4 @@ class UserCommonController extends Controller {
   }
 }
 
-module.exports = UserCommonController;
+module.exports = CommonController;

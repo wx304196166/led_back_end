@@ -2,7 +2,7 @@
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-01-30 11:09:10
+ * @LastEditTime: 2019-02-03 20:57:49
  * @Description: 路由
  */
 
@@ -19,14 +19,12 @@ module.exports = app => {
   });
 
   // 后台管理服务
-  router.resources('brands', 'master/products/brands', controller.master.products.brands);
-  router.resources('classifications', 'master/products/classifications', controller.master.products.classifications);
-  router.resources('labels', 'master/products/labels', controller.master.products.labels);
-  router.resources('products', 'master/products/products', controller.master.products.products);
+  router.post('/master/queryPageList/:index', controller.master.crud.queryPageList);
+  router.post('/master/create/:index', controller.master.crud.create);
+  router.post('/master/update/:index', controller.master.crud.update);
+  router.delete('/master/batchDelete/:index', controller.master.crud.destroy);
 
-  router.resources('integration', 'master/integration', controller.master.integration);
-  router.resources('maintenance', 'master/maintenance', controller.master.maintenance);
-  router.resources('users', 'master/users', controller.master.users);
+  
 
   // 公共接口
   router.post('/user/login', controller.common.login);

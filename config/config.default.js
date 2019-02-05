@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
- * @LastEditTime: 2019-01-06 19:40:26
+ * @LastEditTime: 2019-02-03 19:22:50
  * @Description: 总配置文件
  */
 'use strict';
@@ -36,6 +36,8 @@ module.exports = appInfo => {
   config.cors = {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
   };
- 
+ config.static={
+  prefix: '/'
+ }
   return config;
 }

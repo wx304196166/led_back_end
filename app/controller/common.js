@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-05 17:13:17
+ * @LastEditTime: 2019-02-06 22:38:08
  * @Description: 
  */
 'use strict';
@@ -22,18 +22,56 @@ class CommonController extends Controller {
       password,
       type
     } = ctx.request.body;
-    console.log(`username${username},password${password}`)
-    tableName = type === 0 ? 'admin_user_table' : 'customer_user_info';
-    let user = await app.mysql.get('admin_user_table', {
+    const tableName = type === 0 ? 'admin_user_table' : 'customer_user_info';
+    const user = await app.mysql.get(tableName, {
       username
     });
+
     if (!user) {
       return this.fail('账号不存在');
-    } else if (user.password === password) {
+    } else if (user.password !== password) {
       return this.fail('密码错误');
     }
+    this.setInfo(type, user);
 
-    this.success(user.id);
+  }
+  // 检测用户名重复
+  async check() {
+    const {
+      ctx,
+      app
+    } = this;
+    const {
+      username,
+      type
+    } = ctx.query;
+    tableName = type === 0 ? 'admin_user_table' : 'customer_user_info';
+
+    let user = await app.mysql.get(tableName, {
+      username
+    });
+    if (user) {
+      this.fail('用户名已存在')
+    } else {
+      this.success('ok')
+    }
+  }
+  // 获取用户信息
+  async getUserInfo() {
+    const {
+      ctx,
+      app
+    } = this;
+    const {
+      token,
+      type
+    } = ctx.request.body;
+    const tableName = type === 0 ? 'admin_user_table' : 'customer_user_info';
+
+    const user = await app.mysql.get(tableName, {
+      id: token
+    });
+    this.setInfo(type, user);
   }
   // 注册客户
   async createCustomer() {
@@ -65,13 +103,13 @@ class CommonController extends Controller {
       id,
       username,
       password,
-      realName,
+      real_name: realName,
       phone,
       email,
       points: points || 0,
       grade: grade || 0,
       modification_user_id: modificationUserId || id,
-      modification_ser_type: modificationUserType || 1,
+      modification_user_type: modificationUserType || 1,
       modification_time: new Date()
     };
 
@@ -90,6 +128,28 @@ class CommonController extends Controller {
   /* logout() {
     
   } */
+  // 私有方法
+  async setInfo(type, user) {
+    let info
+    if (type === 0) {
+      info = {
+        username: user.username,
+        type
+      }
+    } else {
+      info = {
+        username: user.username,
+        realName: user.real_name,
+        phone: user.phone,
+        email: user.email,
+        type
+      }
+    }
+    this.success({
+      token: user.id,
+      info
+    });
+  }
 }
 
 module.exports = CommonController;

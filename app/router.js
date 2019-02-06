@@ -2,7 +2,7 @@
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-02-05 13:43:56
+ * @LastEditTime: 2019-02-06 21:46:13
  * @Description: 路由
  */
 
@@ -28,5 +28,8 @@ module.exports = app => {
 
   // 公共接口
   router.post('/common/login', controller.common.login);
+  router.post('/common/getUserInfo', controller.common.getUserInfo);
+
+  router.get('/common/check', controller.common.check);
   router.post('/common/createCustomer', controller.common.createCustomer);
 };

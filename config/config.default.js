@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
- * @LastEditTime: 2019-02-03 19:22:50
+ * @LastEditTime: 2019-02-10 11:46:10
  * @Description: 总配置文件
  */
 'use strict';
@@ -38,6 +38,13 @@ module.exports = appInfo => {
   };
   config.static = {
     prefix: '/'
+  };
+  config.multipart = {
+    mode: 'file'
+  };
+  config.bodyParser= {
+    jsonLimit: '100mb',
+    formLimit: '41mb',
   };
   return config;
 }

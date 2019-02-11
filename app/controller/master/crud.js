@@ -1,15 +1,62 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-05 12:44:55
+ * @LastEditTime: 2019-02-11 12:55:34
  * @Description: 
  */
 'use strict';
 
 const Controller = require('../../core/base_controller');
 const uuid = require('uuid/v4');
-const utils = require('../../utils')
-class BrandsController extends Controller {
+// const utils = require('../../utils')
+class CrudController extends Controller {
+  // 查询表条数
+  async queryNumber() {
+    const {
+      ctx,
+      service
+    } = this;
+    const tableNames = ctx.request.body;
+    const res = await service.master.crud.queryNumber(tableNames);
+    if (res.success) {
+      this.success(res.result);
+    } else {
+      this.fail(res.message)
+    }
+  }
+  // 查询全表
+  async queryAll() {
+    const {
+      ctx,
+      service
+    } = this;
+    const tableName = ctx.params.index + '_info';
+    const res = await service.master.crud.queryAll(tableName);
+    if (res.success) {
+      this.success(res.result);
+    } else {
+      this.fail(res.message)
+    }
+  }  
+  // 查询多条数据
+  async queryMany() {
+    const {
+      ctx,
+      service
+    } = this;
+    const {
+      ids,
+      range
+    } = ctx.request.body;
+    const r = range === 'all' ? '*' : null;
+    const tableName = ctx.params.index + '_info';
+    const res = await service.master.crud.queryMany(tableName, ids, r);
+    if (res.success) {
+      this.success(res.result);
+    } else {
+      this.fail(res.message)
+    }
+  }
   // 模糊查询+分页列表
   async queryPageList() {
     const {
@@ -39,12 +86,12 @@ class BrandsController extends Controller {
     const recieve = ctx.request.body;
     const tableName = ctx.params.index + '_info';
 
-    recieve.id = uuid().replace(/\-/g, '');
-    const data = {}
+    recieve.id = recieve.id || uuid().replace(/\-/g, '');
+    /* const data = {}
     for (const key in recieve) {
       data[utils.toLine(key)] = recieve[key]
-    }
-    const res = await service.master.crud.create(tableName, data);
+    } */
+    const res = await service.master.crud.create(tableName, recieve);
     if (res.success) {
       this.success(res.result);
     } else {
@@ -60,7 +107,7 @@ class BrandsController extends Controller {
     const data = ctx.request.body;
 
     const tableName = ctx.params.index + '_info';
-    data.modification_time=new Date();
+    data.modification_time = this.app.mysql.literals.now;
     /* const data = {}
     for (const key in recieve) {
       data[utils.toLine(key)] = recieve[key]
@@ -90,4 +137,4 @@ class BrandsController extends Controller {
 
 }
 
-module.exports = BrandsController;
+module.exports = CrudController;

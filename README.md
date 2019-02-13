@@ -1,14 +1,17 @@
-# led server
+# simple
 
-This is a server
+
 
 ## QuickStart
+
+<!-- add docs here for user -->
+
+see [egg docs][egg] for more detail.
 
 ### Development
 
 ```bash
 $ npm i
-$ npm run init
 $ npm run dev
 $ open http://localhost:7001/
 ```
@@ -20,12 +23,11 @@ $ npm start
 $ npm stop
 ```
 
-### Npm Scripts
+### npm scripts
 
-- Use `npm run lint` to check code style
-- Use `npm test` to run unit test
-- se `npm run clean` to clean compiled js at development mode once
+- Use `npm run lint` to check code style.
+- Use `npm test` to run unit test.
+- Use `npm run autod` to auto detect dependencies upgrade, see [autod](https://www.npmjs.com/package/autod) for more detail.
 
-### Requirement
 
-- Node.js >= 8.x
+[egg]: https://eggjs.org

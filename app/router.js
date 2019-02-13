@@ -2,7 +2,7 @@
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-02-11 13:06:42
+ * @LastEditTime: 2019-02-13 19:35:01
  * @Description: 路由
  */
 
@@ -18,27 +18,28 @@ module.exports = app => {
     ctx.body = 'ok';
   });
   // 前台接口
-  router.post('/customer/integration/submit',controller.customer.integration.submit);
+  router.post('/api/v1/customer/integration/submit',controller.customer.integration.submit);
 
   // 后台管理服务
-  router.get('/master/queryAll/:index', controller.master.crud.queryAll);
-  router.post('/master/queryMany/:index', controller.master.crud.queryMany);
-  router.post('/master/queryNumber', controller.master.crud.queryNumber);
+  router.get('/api/v1/master/queryAll/:index', controller.master.crud.queryAll);
+  router.post('/api/v1/master/queryMany/:index', controller.master.crud.queryMany);
+  router.post('/api/v1/master/queryNumber', controller.master.crud.queryNumber);
 
 
-  router.post('/master/queryPageList/:index', controller.master.crud.queryPageList);
-  router.post('/master/create/:index', controller.master.crud.create);
-  router.post('/master/update/:index', controller.master.crud.update);
-  router.delete('/master/batchDelete/:index', controller.master.crud.destroy);  
+  router.post('/api/v1/master/queryPageList/:index', controller.master.crud.queryPageList);
+  router.post('/api/v1/master/create/:index', controller.master.crud.create);
+  router.post('/api/v1/master/update/:index', controller.master.crud.update);
+  router.delete('/api/v1/master/batchDelete/:index', controller.master.crud.destroy);  
 
   // 公共接口
-  router.post('/common/queryAllByList', controller.common.queryAllByList);
+  router.post('/api/v1/common/queryAllByList', controller.common.queryAllByList);
 
-  router.post('/common/login', controller.common.login);
-  router.post('/common/getUserInfo', controller.common.getUserInfo);
+  router.post('/api/v1/common/login', controller.common.login);
+  router.post('/api/v1/common/getUserInfo', controller.common.getUserInfo);
 
-  router.get('/common/check', controller.common.check);
-  router.post('/common/createCustomer', controller.common.createCustomer);
+  router.get('/api/v1/common/check', controller.common.check);
+  router.post('/api/v1/common/createCustomer', controller.common.createCustomer);
+  router.post('/api/v1/common/resetPassword', controller.common.resetPassword);
 
-  router.post('/common/upload/:index',controller.common.upload);
+  router.post('/api/v1/common/upload/:index',controller.common.upload);
 };

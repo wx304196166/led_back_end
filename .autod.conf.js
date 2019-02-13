@@ -9,7 +9,7 @@ module.exports = {
     'benchmark',
   ],
   dep: [
-    'egg-cloud',
+    'egg',
     'egg-scripts',
   ],
   devdep: [
@@ -20,7 +20,6 @@ module.exports = {
     'autod-egg',
     'eslint',
     'eslint-config-egg',
-    'egg-rpc-generator',
     'webstorm-disable-index',
   ],
   exclude: [
@@ -28,3 +27,4 @@ module.exports = {
     './dist',
   ],
 };
+

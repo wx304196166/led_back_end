@@ -66,6 +66,8 @@ class CrudService extends Service {
   // 创建
   async create(tableName, data) {
     data.modification_time = this.app.mysql.literals.now;
+    data.create_time = this.app.mysql.literals.now;
+
     const result = await this.app.mysql.insert(tableName, data);
     const flag = result.affectedRows === 1;
     if (flag) {

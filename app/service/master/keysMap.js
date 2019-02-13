@@ -18,8 +18,8 @@ module.exports = {
     classification_info: '*',
     label_info: '*',
 
-    customer_user_info: '*',
-    admin_user_info: '*',
+    customer_user_info: 'id,username,real_name,phone,email,points,grade,modification_user_id,modification_user_type',
+    admin_user_info: 'id,username',
 
     integrate_info: '*',
     maintenance_info: '*',

@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-11 21:21:14
+ * @LastEditTime: 2019-02-13 19:07:54
  * @Description: 
  */
 'use strict';
@@ -154,19 +154,22 @@ class CommonController extends Controller {
       username,
       password,
       realName,
+      real_name,
       phone,
       email,
       points,
       grade,
       modificationUserId,
-      modificationUserType
+      modification_user_id,
+      modificationUserType,
+      modification_user_type,
     } = ctx.request.body;
 
     let user = await app.mysql.get('customer_user_info', {
       username
     });
     if (user) {
-      return this.fail('用户名已存在')
+      return this.fail('User name already exists')
     }
     const id = uuid().replace(/\-/g, '');
 
@@ -174,26 +177,74 @@ class CommonController extends Controller {
       id,
       username,
       password: md5(password),
-      real_name: realName,
+      real_name: realName || real_name,
       phone,
       email,
       points: points || 0,
       grade: grade || 0,
       modification_user_id: modificationUserId || id,
       modification_user_type: modificationUserType || 1,
-      modification_time: this.app.mysql.literals.now
+      modification_time: this.app.mysql.literals.now,
+      create_time: this.app.mysql.literals.now
     };
+    if (modification_user_id !== undefined && modification_user_type !== undefined) {
+      data.modification_user_id = modification_user_id;
+      data.modification_user_type = modification_user_type;
+    }
 
-
-    let result = await app.mysql.insert('customer_user_info', data);
+    const result = await app.mysql.insert('customer_user_info', data);
     const flag = result.affectedRows === 1;
 
     if (flag) {
       this.success(id);
     } else {
-      this.fail('注册失败');
+      this.fail(result.message);
     }
 
+  }
+  // 修改密码
+  async resetPassword() {
+    const {
+      ctx,
+      app
+    } = this;
+    const recieve = ctx.request.body;
+    recieve.modification_time = this.app.mysql.literals.now;
+    if (recieve.modificationUserType) {
+      const user = await app.mysql.get('customer_user_info', {
+        id: recieve.id,
+        password: recieve.password,
+        modification_time: recieve.modification_time,
+        modification_user_id: recieve.modification_user_id,
+        modification_user_type: recieve.modification_user_type
+      });
+      if (user) {
+        const result = await app.mysql.update('customer_user_info', {
+          id: recieve.id,
+          password: md5(recieve.newPassword)
+        })
+        const flag = result.affectedRows === 1;
+        if (flag) {
+          this.success('Reset Success!');
+        } else {
+          this.fail(result.message);
+        }
+      }
+    } else {
+      if (recieve.password === '') {
+        delete recieve.password;
+      }
+      if (recieve.password) {
+        recieve.password = md5(recieve.password);
+      }
+      const result = await app.mysql.update('customer_user_info', recieve)
+      const flag = result.affectedRows === 1;
+      if (flag) {
+        this.success('Reset Success!');
+      } else {
+        this.fail(result.message);
+      }
+    }
   }
   // 客户用户注销登录
   /* logout() {

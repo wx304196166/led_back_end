@@ -1,27 +1,10 @@
 {
-  "name": "led-server",
-  "version": "1.0.0",
-  "description": "This is a server",
+  "name": "amt-server",
+  "version": "0.0.1",
+  "description": "This is amt back end",
   "private": true,
-  "egg": {
-    "framework": "egg-cloud"
-  },
-  "scripts": {
-    "start": "npm run init && egg-scripts start --daemon --title=egg-server-led server",
-    "stop": "egg-scripts stop --title=egg-server-led server",
-    "dev": "egg-bin dev",
-    "debug": "egg-bin debug",
-    "test": "npm run lint -- --fix && npm run test-local",
-    "test-local": "egg-bin test",
-    "cov": "egg-bin cov",
-    "lint": "eslint .",
-    "ci": "npm run lint && npm run cov",
-    "rpc": "egg-rpc-generator",
-    "init": "npm run rpc",
-    "autod": "autod"
-  },
   "dependencies": {
-    "egg-cloud": "^0.2.0",
+    "egg": "^2.2.1",
     "egg-cors": "^2.1.2",
     "egg-mysql": "^3.0.0",
     "egg-scripts": "^2.10.0",
@@ -30,17 +13,28 @@
   },
   "devDependencies": {
     "autod": "^3.0.1",
-    "autod-egg": "^1.1.0",
-    "egg-bin": "^4.9.0",
-    "egg-ci": "^1.10.0",
-    "egg-mock": "^3.20.1",
-    "egg-rpc-generator": "^1.1.1",
-    "eslint": "^5.9.0",
-    "eslint-config-egg": "^7.1.0",
+    "autod-egg": "^1.0.0",
+    "egg-bin": "^4.3.5",
+    "egg-ci": "^1.8.0",
+    "egg-mock": "^3.14.0",
+    "eslint": "^4.11.0",
+    "eslint-config-egg": "^6.0.0",
     "webstorm-disable-index": "^1.2.0"
   },
   "engines": {
     "node": ">=8.9.0"
+  },
+  "scripts": {
+    "start": "egg-scripts start --daemon --title=egg-server-simple",
+    "stop": "egg-scripts stop --title=egg-server-simple",
+    "dev": "egg-bin dev",
+    "debug": "egg-bin debug",
+    "test": "npm run lint -- --fix && npm run test-local",
+    "test-local": "egg-bin test",
+    "cov": "egg-bin cov",
+    "lint": "eslint .",
+    "ci": "npm run lint && npm run cov",
+    "autod": "autod"
   },
   "ci": {
     "version": "8"
@@ -49,9 +43,6 @@
     "type": "git",
     "url": ""
   },
-  "eslintIgnore": [
-    "coverage"
-  ],
   "author": "Mario X Wang",
   "license": "MIT"
 }

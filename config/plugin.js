@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
- * @LastEditTime: 2019-01-07 09:44:38
+ * @LastEditTime: 2019-02-13 21:33:57
  * @Description: 
  */
 'use strict';
@@ -10,7 +10,7 @@ exports.mysql = {
   package: 'egg-mysql',
 };
 exports.cors = {
-  enable: true,
+  enable: false,
   package: 'egg-cors',
 };
 

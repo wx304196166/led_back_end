@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-14 19:56:46
+ * @LastEditTime: 2019-02-14 22:25:52
  * @Description: 
  */
 'use strict';
@@ -91,8 +91,10 @@ class CommonController extends Controller {
       name,
       condition
     } = this.ctx.request.body
-    const tableName = name+'_info';
-    const result = await this.app.mysql.select(tableName, {where:condition});
+    const tableName = name + '_info';
+    const result = await this.app.mysql.select(tableName, {
+      where: condition
+    });
     this.success(result);
   }
   // 登录
@@ -253,7 +255,10 @@ class CommonController extends Controller {
       if (recieve.password) {
         recieve.password = md5(recieve.password);
       }
-      const result = await app.mysql.update('customer_user_info', recieve)
+      delete recieve.create_time;
+      delete recieve.create_user_id;
+      delete recieve.create_user_type;
+      const result = await app.mysql.update('customer_user_info', recieve);
       const flag = result.affectedRows === 1;
       if (flag) {
         this.success('Reset Success!');

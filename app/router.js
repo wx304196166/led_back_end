@@ -2,7 +2,7 @@
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-02-14 20:36:31
+ * @LastEditTime: 2019-02-15 01:37:50
  * @Description: 路由
  */
 
@@ -17,10 +17,11 @@ module.exports = app => {
   router.options('*', async ctx => {
     ctx.body = 'ok';
   });
-  // 前台接口
-  router.post('/api/v1/customer/integration/submit',controller.customer.integration.submit);
+  /* -----------------前台应用接口----------------- */
+  router.post('/api/v1/customer/integration/submit', controller.customer.integration.submit);
 
-  // 后台管理服务
+  /* -----------------后台管理接口---------------- */
+  // 共用
   router.get('/api/v1/master/queryAll/:index', controller.master.crud.queryAll);
   router.post('/api/v1/master/queryMany/:index', controller.master.crud.queryMany);
   router.post('/api/v1/master/queryNumber', controller.master.crud.queryNumber);
@@ -29,7 +30,11 @@ module.exports = app => {
   router.post('/api/v1/master/queryPageList/:index', controller.master.crud.queryPageList);
   router.post('/api/v1/master/create/:index', controller.master.crud.create);
   router.post('/api/v1/master/update/:index', controller.master.crud.update);
-  router.delete('/api/v1/master/batchDelete/:index', controller.master.crud.destroy);  
+  router.delete('/api/v1/master/batchDelete/:index', controller.master.crud.destroy);
+  // product
+  router.delete('/api/v1/master/product/:index', controller.master.product.destroy);
+
+
 
   // 公共接口
   router.post('/api/v1/common/queryAllByList', controller.common.queryAllByList);
@@ -42,5 +47,5 @@ module.exports = app => {
   router.post('/api/v1/common/createCustomer', controller.common.createCustomer);
   router.post('/api/v1/common/resetPassword', controller.common.resetPassword);
 
-  router.post('/api/v1/common/upload/:index',controller.common.upload);
+  router.post('/api/v1/common/upload/:index', controller.common.upload);
 };

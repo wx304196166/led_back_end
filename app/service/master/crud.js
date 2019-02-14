@@ -86,6 +86,10 @@ class CrudService extends Service {
   }
   // 更新
   async update(tableName, data) {
+    delete data.create_time;
+    delete data.create_user_id;
+    delete data.create_user_type;
+
     const result = await this.app.mysql.update(tableName, data);
     const flag = result.affectedRows === 1;
     if (flag) {
@@ -100,8 +104,23 @@ class CrudService extends Service {
     }
   }
   // 删除
+  async del(tableName,id){
+    const mysql = this.app.mysql;
+    const result =await mysql.delete(tableName,{id});
+    const flag = result.affectedRows === 1;
+    if (flag) {
+      return {
+        success: true,
+        result
+      }
+    }
+    return {
+      success: false,
+      message: result.message
+    }
+  }
+  // 批量删除
   async destroy(tableName, ids) {
-    let result;
     const mysql = this.app.mysql;
     let condition = '';
     ids.forEach((id, index) => {
@@ -111,7 +130,7 @@ class CrudService extends Service {
         condition += mysql.escape(id)
       }
     });
-    result = await mysql.query(`delete from ${tableName} where id in (${condition})`);
+    const result = await mysql.query(`delete from ${tableName} where id in (${condition})`);
     const flag = result.affectedRows === ids.length;
 
     if (flag) {
@@ -124,7 +143,6 @@ class CrudService extends Service {
       success: false,
       message: result.message
     }
-
   }
 }
 

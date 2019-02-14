@@ -23,6 +23,6 @@ module.exports = {
 
     integrate_info: '*',
     maintenance_info: '*',
-    product_info: 'id,name,classification_id,brand_id,label_id,specifications,is_main'
+    product_info: 'id,name,classification_id,brand_id,label_id,img_list,thumbnail,specifications,product_id,is_main'
   }
 };

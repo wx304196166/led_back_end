@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-13 19:07:54
+ * @LastEditTime: 2019-02-14 16:12:53
  * @Description: 
  */
 'use strict';
@@ -185,11 +185,15 @@ class CommonController extends Controller {
       modification_user_id: modificationUserId || id,
       modification_user_type: modificationUserType || 1,
       modification_time: this.app.mysql.literals.now,
-      create_time: this.app.mysql.literals.now
+      create_time: this.app.mysql.literals.now,
+      create_user_id: modificationUserId || id,
+      create_user_type: modificationUserType || 1,
     };
     if (modification_user_id !== undefined && modification_user_type !== undefined) {
       data.modification_user_id = modification_user_id;
       data.modification_user_type = modification_user_type;
+      data.create_user_id = modification_user_id;
+      data.create_user_type = modification_user_type;
     }
 
     const result = await app.mysql.insert('customer_user_info', data);

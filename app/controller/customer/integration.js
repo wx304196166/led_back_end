@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-08 13:59:58
+ * @LastEditTime: 2019-02-14 18:56:34
  * @Description: 
  */
 'use strict';
@@ -9,7 +9,7 @@
 const Controller = require('../../core/base_controller');
 const uuid = require('uuid/v4');
 const tableName = 'integrate_info';
-class IntegrationController extends Controller {
+class IntegrationController extends Controller { 
   // 创建
   async submit() {
     const {

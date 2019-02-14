@@ -2,7 +2,7 @@
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-02-13 19:35:01
+ * @LastEditTime: 2019-02-14 20:36:31
  * @Description: 路由
  */
 
@@ -33,6 +33,7 @@ module.exports = app => {
 
   // 公共接口
   router.post('/api/v1/common/queryAllByList', controller.common.queryAllByList);
+  router.post('/api/v1/common/queryAllByCondition', controller.common.queryAllByCondition);
 
   router.post('/api/v1/common/login', controller.common.login);
   router.post('/api/v1/common/getUserInfo', controller.common.getUserInfo);

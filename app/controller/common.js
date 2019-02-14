@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-14 16:12:53
+ * @LastEditTime: 2019-02-14 19:56:46
  * @Description: 
  */
 'use strict';
@@ -82,6 +82,18 @@ class CommonController extends Controller {
       }
     }
     this.success(map);
+  }
+  // 条件精确查询全表
+
+  async queryAllByCondition() {
+
+    const {
+      name,
+      condition
+    } = this.ctx.request.body
+    const tableName = name+'_info';
+    const result = await this.app.mysql.select(tableName, {where:condition});
+    this.success(result);
   }
   // 登录
   async login() {

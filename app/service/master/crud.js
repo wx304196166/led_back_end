@@ -1,15 +1,16 @@
 const Service = require('egg').Service;
 const keysMap = require('./keysMap');
 class CrudService extends Service {
+
   // 获取表条数
-  async queryNumber(tableNames){
+  async queryNumber(tableNames) {
     const mysql = this.app.mysql;
-    const result=[];
-    for(const name of tableNames){
+    const result = [];
+    for (const name of tableNames) {
       const total = await mysql.query(`select count(id) from ${name}_info`);
-      if(total[0]&&total[0]['count(id)']){
+      if (total[0] && total[0]['count(id)']) {
         result.push(total[0]['count(id)']);
-      }else{
+      } else {
         result.push(0);
       }
     }
@@ -27,7 +28,8 @@ class CrudService extends Service {
       success: true,
       result
     };
-  }  
+  }
+  
   // 根据id查询多条数据
   async queryMany(tableName, ids, range) {
     const mysql = this.app.mysql;

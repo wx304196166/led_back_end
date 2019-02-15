@@ -2,7 +2,7 @@
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-02-15 01:37:50
+ * @LastEditTime: 2019-02-15 21:50:25
  * @Description: 路由
  */
 
@@ -19,13 +19,12 @@ module.exports = app => {
   });
   /* -----------------前台应用接口----------------- */
   router.post('/api/v1/customer/integration/submit', controller.customer.integration.submit);
-
+  router.get('/api/v1/customer/maintenance', controller.customer.maintenance.search);
   /* -----------------后台管理接口---------------- */
   // 共用
   router.get('/api/v1/master/queryAll/:index', controller.master.crud.queryAll);
   router.post('/api/v1/master/queryMany/:index', controller.master.crud.queryMany);
   router.post('/api/v1/master/queryNumber', controller.master.crud.queryNumber);
-
 
   router.post('/api/v1/master/queryPageList/:index', controller.master.crud.queryPageList);
   router.post('/api/v1/master/create/:index', controller.master.crud.create);
@@ -37,6 +36,7 @@ module.exports = app => {
 
 
   // 公共接口
+  router.get('/api/v1/common/queryOne/:index', controller.common.queryOne)
   router.post('/api/v1/common/queryAllByList', controller.common.queryAllByList);
   router.post('/api/v1/common/queryAllByCondition', controller.common.queryAllByCondition);
 

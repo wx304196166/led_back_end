@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-14 22:25:52
+ * @LastEditTime: 2019-02-15 11:23:55
  * @Description: 
  */
 'use strict';
@@ -51,6 +51,16 @@ class CommonController extends Controller {
       productId: id
     });
 
+  }
+  // 查询单条数据
+  async queryOne() {
+    const ctx = this.ctx;
+    const id = ctx.query.id;
+    const tableName = ctx.params.index + '_info';
+    const result = await this.app.mysql.get(tableName, {
+      id
+    });
+    this.success(result);
   }
   // 查询多个表返回 id/名称 映射
   async queryAllByList() {

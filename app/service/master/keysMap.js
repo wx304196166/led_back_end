@@ -10,7 +10,7 @@ module.exports = {
 
     integrate_info: ['id', 'name'],
     maintenance_info: ['id', 'name'],
-    product_info: ['id', 'name','classification_id','brand_id','label_id','thumbnail','intro']
+    product_info: ['id', 'name','classification_id','brand_id','label_id','thumbnail','intro','specifications','product_id','is_main']
   },
   // 分页列表返回的字段
   queryPageList: {

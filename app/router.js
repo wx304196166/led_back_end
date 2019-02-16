@@ -2,7 +2,7 @@
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
  * @LastEditors: Please set LastEditors
- * @LastEditTime: 2019-02-15 21:50:25
+ * @LastEditTime: 2019-02-16 10:03:41
  * @Description: 路由
  */
 
@@ -18,7 +18,10 @@ module.exports = app => {
     ctx.body = 'ok';
   });
   /* -----------------前台应用接口----------------- */
+  // 集成
+  router.get('/api/v1/customer/integration', controller.customer.integration.getMainProduct);
   router.post('/api/v1/customer/integration/submit', controller.customer.integration.submit);
+  
   router.get('/api/v1/customer/maintenance', controller.customer.maintenance.search);
   /* -----------------后台管理接口---------------- */
   // 共用
@@ -30,7 +33,7 @@ module.exports = app => {
   router.post('/api/v1/master/create/:index', controller.master.crud.create);
   router.post('/api/v1/master/update/:index', controller.master.crud.update);
   router.delete('/api/v1/master/batchDelete/:index', controller.master.crud.destroy);
-  // product
+  // 产品
   router.delete('/api/v1/master/product/:index', controller.master.product.destroy);
 
 

@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-15 23:02:23
+ * @LastEditTime: 2019-02-19 22:45:44
  * @Description: 
  */
 'use strict';
@@ -31,7 +31,7 @@ class MaintenanceController extends Controller {
         return;
       }
     }
-    this.fail(result.message || product.message);
+    this.fail('Maintenance information does not exist');
   }
 
 }

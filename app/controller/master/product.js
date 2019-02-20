@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 18:56:28
- * @LastEditTime: 2019-02-15 01:10:31
+ * @LastEditTime: 2019-02-20 09:18:59
  * @Description: 
  */
 'use strict';
@@ -27,7 +27,11 @@ class ProductController extends Controller {
     if (res.success) {
       const publicPath = path.join(this.config.baseDir, '/app/public/upload/product/');
       for (const item of imgs) {
-        fs.unlink(publicPath + item);
+        fs.unlink(publicPath + item,err=>{
+          if(err){
+            throw err;
+          }
+        });
       }
       this.success(res.result);
     } else {

@@ -1,7 +1,7 @@
 /*
  * @Author: Mario X Wang
  * @Date: 2019-01-05 15:39:45
- * @LastEditTime: 2019-02-12 06:17:40
+ * @LastEditTime: 2019-02-21 22:22:21
  * @Description: 总配置文件
  */
 'use strict';
@@ -45,6 +45,11 @@ module.exports = appInfo => {
   config.bodyParser= {
     jsonLimit: '100mb',
     formLimit: '41mb',
+  };
+  config.httpclient={
+    request:{
+      timeout:3600000
+    }
   };
   return config;
 }
